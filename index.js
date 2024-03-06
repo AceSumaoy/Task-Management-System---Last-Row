@@ -120,4 +120,70 @@ TodoListApp.prototype.editTask = function (editButton) {
 
     // Mark the note as edit mode
     editNote.classList.add('edit-mode');
+    
 };
+
+TodoListApp.prototype.confirmDeleteModal = function (deleteButton) {
+    // Display a confirmation message in the modal
+    const deleteNote = deleteButton.closest('.note');
+    
+    if (deleteNote) {
+        const taskId = deleteNote.querySelector('.note-id').textContent;
+        this.confirmationText.textContent = `Are you sure you want to delete task ${taskId}?`;
+
+        // Show the modal
+        this.confirmationModal.style.display = 'block';
+
+        // Store the note to be deleted in a property for later use
+        this.noteToDelete = deleteNote; // Ensure that this assignment is correct
+
+        // Clear the noteToDelete property when the modal is closed
+        const closeModal = () => {
+            this.noteToDelete = null;
+            this.confirmationModal.style.display = 'none';
+        };
+
+        // Attach event listeners to the modal buttons
+        this.confirmDeleteBtn.addEventListener('click', this.confirmDelete.bind(this));
+        this.cancelDeleteBtn.addEventListener('click', closeModal);
+    }
+};
+
+TodoListApp.prototype.confirmDelete = function () {
+    // Close the modal
+    this.confirmationModal.style.display = 'none';
+
+    // Check if this.noteToDelete is defined
+    if (this.noteToDelete && this.noteToDelete.querySelector) {
+        // Retrieve the task details from the note
+        const taskId = this.noteToDelete.querySelector('.note-id').textContent;
+
+        // Remove the note from the UI
+        this.noteToDelete.remove();
+
+        // Send a request to the server to delete the task
+        fetch('api.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `action=deleteTask&taskId=${taskId}`,
+        })
+        .catch(error => {
+            console.error('Error deleting task:', error);
+        });
+    } else {
+        console.error('Error: Unable to delete task. Note to delete is not properly set.');
+    }
+};
+
+
+TodoListApp.prototype.cancelDelete = function () {
+    // Close the modal
+    this.confirmationModal.style.display = 'none';
+};
+
+// Instantiate the TodoListApp
+const app = new TodoListApp();
+
+//----------------------------------------------------------------DELETE SAMANTE
