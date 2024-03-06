@@ -1,11 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task Management System</title>
+    <title>TODO List</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-v0k1IkR7Z5lHe0f5PFVZl82a5vGKsHb0E3F5/Ag9bINzB9LqmaNryTx/04QFsfU6" crossorigin="anonymous">
+
 </head>
+
 <body>
-    
+    <div class="container">
+        <div class="input-container">
+        <h1>TO DO LIST</h1>
+            <div class="input-row">
+                <label for="title">Title:</label>
+                <br>
+                <input type="text" id="title">
+            </div>
+            <div class="input-row">
+                <label for="description">Description:</label>
+                <br>
+                <input type="text" id="description">
+            </div>
+            <div class="input-row">
+                <label for="date">Date:</label><br>
+                <input type="date" id="date">
+            </div>
+            <button id="addItemBtn" class ="addBtn" >Add Item</button>
+        </div>
+        <div id="todoList" class="notes-container"></div>
+    </div>
+
+    <!-- Modal for Confirmation -->
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <p id="confirmationText"></p>
+            <button id="confirmDeleteBtn" class="confirmBtn">Confirm</button>
+            <button id="cancelDeleteBtn" class="cancelBtn">Cancel</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const app = new TodoListApp();
+            app.init();
+        });
+    </script>
+    <script src="script.js"></script>
 </body>
+
 </html>
+
+
+
