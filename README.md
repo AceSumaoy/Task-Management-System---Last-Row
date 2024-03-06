@@ -6,8 +6,8 @@ Develop a Task Management System that helps users manage their tasks efficiently
 
 - Scrum Master: Sumaoy
 - Product Owner: Salasiban
-- Back-End Team: Ravello, Samante, Santos
-- Front-End Team: Riego De Dios, Ramos, Quiroz
+- Back-End Team: Ravello, Samante, Quiroz
+- Front-End Team: Riego De Dios, Ramos, Santos
 
 ## Product Backlog
 
