@@ -19,6 +19,7 @@ function TodoListApp() {
     this.init();
 }
 
+// Define methods
 TodoListApp.prototype.addItem = function () {
     // Get the values from the input fields
     const title = this.titleInput.value;
@@ -33,7 +34,7 @@ TodoListApp.prototype.addItem = function () {
         const taskId = editNote.querySelector(".note-id").textContent;
 
         // Update the task on the server
-        fetch('api.php', {
+        fetch('config.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -55,7 +56,7 @@ TodoListApp.prototype.addItem = function () {
         editNote.classList.remove("edit-mode");
     } else {
         // Add the new task on the server
-        fetch('api.php', {
+        fetch('config.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -120,7 +121,6 @@ TodoListApp.prototype.editTask = function (editButton) {
 
     // Mark the note as edit mode
     editNote.classList.add('edit-mode');
-    
 };
 
 TodoListApp.prototype.confirmDeleteModal = function (deleteButton) {
@@ -162,7 +162,7 @@ TodoListApp.prototype.confirmDelete = function () {
         this.noteToDelete.remove();
 
         // Send a request to the server to delete the task
-        fetch('api.php', {
+        fetch('config.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -183,14 +183,10 @@ TodoListApp.prototype.cancelDelete = function () {
     this.confirmationModal.style.display = 'none';
 };
 
-// Instantiate the TodoListApp
-const app = new TodoListApp();
-
-//----------------------------------------------------------------DELETE SAMANTE
-
+// Update initialization to fetch existing tasks
 TodoListApp.prototype.init = function () {
     // Fetch existing tasks from the server
-    fetch('api.php', {
+    fetch('config.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -236,3 +232,7 @@ TodoListApp.prototype.displayTasks = function (tasks) {
         todoList.appendChild(note);
     });
 };
+
+// Instantiate the TodoListApp
+const app = new TodoListApp();
+
