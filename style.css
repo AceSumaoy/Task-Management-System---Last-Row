@@ -1,0 +1,230 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px; /* Increased width for better spacing */
+    padding: 20px;
+    margin: 0 auto; /* Horizontally center the container */
+    display: flex; /* Use Flexbox to arrange items */
+    justify-content: space-between; /* Add space between the two main components */
+    gap: 20px; /* Add gap between the form and task results */
+    align-items: center;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    flex-grow: 1; /* Make the h1 take up available space */
+}
+
+/* Input Styles */
+.input-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    flex-grow: 1; /* Make the input container take up available space */
+}
+
+.input-row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.label-input {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.label-input label {
+    margin-bottom: 5px;
+    color: #555;
+    font-weight: 400;
+}
+
+.input-row input {
+    flex-grow: 1;
+    margin-left: 2px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+button {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    padding: 12px 79px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Notes Container Styles */
+.notes-container {
+    margin-top: 20px;
+}
+
+.note {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 10px;
+    flex-grow: 1; /* Make the note take up available space */
+}
+
+.note-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.note-title {
+    font-size: 20px;
+    font-weight: bold;
+    flex-grow: 2;
+    padding-left: 13px;
+    padding-top: 15px;
+}
+
+.note-id {
+    font-size: 17px;
+    color: #e74c3c;
+    padding-left: 10px;
+    padding-top: 15px;
+}
+
+.note-description {
+    font-size: 15px;
+    color: #555;
+    text-align: justify;
+    padding: 10px 10px;
+}
+
+.note-date {
+    font-size: 14px;
+    color: #e74c3c;
+    float: right;
+    margin-top: -134px;
+    margin-right: 15px;
+    font-weight: bold;
+}
+
+.note-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.note-actions button {
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 5px;
+}
+
+.note-actions button.edit-btn {
+    background-color: #3498db; /* Blue color */
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.note-actions button.delete-btn {
+    background-color: #e74c3c; /* Red color */
+    color: #fff;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+
+.note-actions button:hover {
+    background-color: #45a049;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* Modal Styles */
+.modal-content {
+    background-color: #fff;
+    width: 400px; /* Set a fixed width */
+    margin: 10% auto; /* Adjusted margin for centering */
+    padding: 30px 20px; /* Adjusted padding */
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+}
+
+.modal-content button {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.modal-content button:hover {
+    background-color: #45a049;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    color: #aaa;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #333;
+}
+
+label {
+    padding-left: 4px;
+    font-weight: bold;
+}
+
+/* Icon Styles */
+.note-actions button i {
+    font-size: 16px;
+    margin-right: 5px;
+}
+
+/* Edit Button */
+.note-actions button.edit-btn i {
+    margin-right: 5px;
+}
+
+/* Delete Button */
+.note-actions button.delete-btn i {
+    margin-right: -10px;
+}
