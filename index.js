@@ -98,3 +98,26 @@ TodoListApp.prototype.addItem = function () {
     // Reset the button text to "Add Item"
     this.addItemBtn.textContent = "Add Item";
 };
+
+TodoListApp.prototype.editTask = function (editButton) {
+    // Retrieve the task details from the note
+    const editNote = editButton.closest('.note');
+    const taskId = editNote.querySelector('.note-id').textContent;
+    const title = editNote.querySelector('.note-title').textContent;
+    const description = editNote.querySelector('.note-description').textContent;
+    const date = editNote.querySelector('.note-date').textContent;
+
+    // Populate the form with task details for editing
+    this.titleInput.value = title;
+    this.descriptionInput.value = description;
+    this.dateInput.value = date;
+
+    // Change the button text to "Update" for editing mode
+    this.addItemBtn.textContent = 'Update';
+
+    // Add a data-id attribute to the button to store the task ID
+    this.addItemBtn.setAttribute('data-id', taskId);
+
+    // Mark the note as edit mode
+    editNote.classList.add('edit-mode');
+};
