@@ -187,3 +187,52 @@ TodoListApp.prototype.cancelDelete = function () {
 const app = new TodoListApp();
 
 //----------------------------------------------------------------DELETE SAMANTE
+
+TodoListApp.prototype.init = function () {
+    // Fetch existing tasks from the server
+    fetch('api.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: 'action=getTasks',
+    })
+        .then(response => response.json())
+        .then(data => {
+            // Handle the response if needed
+            console.log(data);
+            // Display existing tasks
+            this.displayTasks(data);
+        })
+        .catch(error => {
+            console.error('Error fetching tasks:', error);
+        });
+};
+
+TodoListApp.prototype.displayTasks = function (tasks) {
+    const todoList = document.getElementById("todoList");
+
+    // Clear existing notes in the container
+    todoList.innerHTML = '';
+
+    // Iterate over tasks and add each one to the container
+    tasks.forEach(task => {
+        const note = document.createElement('div');
+        note.classList.add('note');
+
+      note.innerHTML = `<div class="note-header">
+                    <span class="note-id">${task.id}</span>
+                    <span class="note-title">${task.title}</span>
+                  </div>
+                  <div class="note-description">${task.description}</div>
+                  <div class="note-date">${new Date(task.date).toLocaleDateString()}</div>
+                  <div class="note-actions">
+                    <button class="edit-btn" onclick="app.editTask(this)">Edit</button>
+                    <button class="delete-btn" onclick="app.confirmDeleteModal(this)">Delete</button>
+                  </div>`;
+
+
+        // Add the note to the container
+        todoList.appendChild(note);
+    });
+};
