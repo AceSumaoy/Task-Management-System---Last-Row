@@ -81,6 +81,7 @@ TodoListApp.prototype.addItem = function () {
                                   <div class="note-actions">
                                     <button onclick="app.editTask(this)">Edit</button>
                                     <button onclick="app.confirmDeleteModal(this)">Delete</button>
+                                    <button onclick="app.confirmDoneModal(this)">Done</button>
                                   </div>`;
 
                 // Add the note to the container
@@ -98,6 +99,66 @@ TodoListApp.prototype.addItem = function () {
 
     // Reset the button text to "Add Item"
     this.addItemBtn.textContent = "Add Item";
+};
+
+TodoListApp.prototype.confirmDoneModal = function (doneButton) {
+    // Display a confirmation message in the modal
+    const doneNote = doneButton.closest('.note');
+    
+    if (doneNote) {
+        const taskId = doneNote.querySelector('.note-id').textContent;
+        this.confirmationText.textContent = `Are you sure you want to done task ${taskId}?`;
+
+        // Show the modal
+        this.confirmationModal.style.display = 'block';
+
+        // Store the note to be doned in a property for later use
+        this.noteToDone = doneNote; // Ensure that this assignment is correct
+
+        // Clear the noteToDone property when the modal is closed
+        const closeModal = () => {
+            this.noteToDone = null;
+            this.confirmationModal.style.display = 'none';
+        };
+
+        // Attach event listeners to the modal buttons
+        this.confirmDoneBtn.addEventListener('click', this.confirmDone.bind(this));
+        this.cancelDoneBtn.addEventListener('click', closeModal);
+    }
+};
+
+TodoListApp.prototype.confirmDone = function () {
+    // Close the modal
+    this.confirmationModal.style.display = 'none';
+
+    // Check if this.noteToDone is defined
+    if (this.noteToDone && this.noteToDone.querySelector) {
+        // Retrieve the task details from the note
+        const taskId = this.noteToDone.querySelector('.note-id').textContent;
+
+        // Remove the note from the UI
+        this.noteToDone.remove();
+
+        // Send a request to the server to done the task
+        fetch('config.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `action=deleteTask&taskId=${taskId}`,
+        })
+        .catch(error => {
+            console.error('Error done task:', error);
+        });
+    } else {
+        console.error('Error: Unable to done task. Note to done is not properly set.');
+    }
+};
+
+
+TodoListApp.prototype.cancelDone= function () {
+    // Close the modal
+    this.confirmationModal.style.display = 'none';
 };
 
 TodoListApp.prototype.editTask = function (editButton) {
@@ -225,6 +286,7 @@ TodoListApp.prototype.displayTasks = function (tasks) {
                   <div class="note-actions">
                     <button class="edit-btn" onclick="app.editTask(this)">Edit</button>
                     <button class="delete-btn" onclick="app.confirmDeleteModal(this)">Delete</button>
+                    <button class="done-btn" onclick="app.confirmDoneModal(this)">Done</button>
                   </div>`;
 
 
